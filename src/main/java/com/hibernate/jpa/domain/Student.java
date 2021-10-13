@@ -35,26 +35,26 @@ public class Student
             updatable = false,
             nullable = false
     )
-    protected UUID id;
+    private UUID id;
 
     @Version
     @Column(
             name = "version"
     )
-    protected Long version;
+    private Long version;
 
     @CreationTimestamp
     @Column(
             name = "created_date",
             updatable = false
     )
-    protected Timestamp createdDate;
+    private Timestamp createdDate;
 
     @UpdateTimestamp
     @Column(
             name = "last_modified_date"
     )
-    protected Timestamp lastModifiedDate;
+    private Timestamp lastModifiedDate;
     @Column(
             name = "first_name",
             nullable = false
