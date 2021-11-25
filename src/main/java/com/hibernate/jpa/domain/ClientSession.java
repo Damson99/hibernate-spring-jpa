@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.UUID;
 
 @Builder
@@ -16,59 +17,49 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString(callSuper = true)
-@Entity(name = "Student")
+@Entity(name = "ClientSession")
 @Table(
-        name = "student",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "student_email_unique", columnNames = "email")
-        })
-public class Student
-{
+        name = "client_session")
+public class ClientSession {
+
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Type(type = "org.hibernate.type.UUIDCharType")
-    @Column(
-            name = "id",
+    @Column(name = "id",
             length = 36,
             columnDefinition = "varchar(36)",
             updatable = false,
-            nullable = false
-    )
+            nullable = false)
     private UUID id;
 
-    @Version
-    @Column(
-            name = "version"
-    )
-    private Long version;
-
     @CreationTimestamp
-    @Column(
-            name = "created_date",
-            updatable = false
-    )
+    @Column(name = "created_date",
+            updatable = false)
     private Timestamp createdDate;
 
     @UpdateTimestamp
-    @Column(
-            name = "last_modified_date"
-    )
+    @Column(name = "last_modified_date")
     private Timestamp lastModifiedDate;
-    @Column(
-            name = "first_name",
-            nullable = false
-    )
-    private String firstName;
-    @Column(
-            name = "surname",
-            nullable = false
-    )
-    private String surname;
-    @Column(
-            name = "email",
-            nullable = false
-    )
-    private String email;
-    private int age;
+
+    @Column(name = "session_start")
+    private long sessionStart;
+
+    @Column(name = "session_end")
+    private long sessionEnd;
+
+    @Column(name = "screen_resolution_x")
+    private int screenResolutionX;
+
+    @Column(name = "screen_resolution_y")
+    private int screenResolutionY;
+
+    @Column(name = "address_ip")
+    private String addressIp;
+
+    @OneToMany
+    private Collection<ClientAction> clientActions;
+
+    @ManyToOne
+    private Client client;
 }
