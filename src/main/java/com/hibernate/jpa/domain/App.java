@@ -6,8 +6,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
 
 @Builder
 @AllArgsConstructor
@@ -34,8 +32,8 @@ public class App {
             columnDefinition = "varchar(36)")
     private String name;
 
-    @OneToMany
-    private Collection<ClientSession> clientSessions = new ArrayList<>();
+//    @OneToMany
+//    private Collection<ClientSession> clientSessions = new ArrayList<>();
 
     @CreationTimestamp
     @Column(

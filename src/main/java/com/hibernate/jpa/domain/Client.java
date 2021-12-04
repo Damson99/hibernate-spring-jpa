@@ -10,9 +10,8 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-@ToString
-@Getter
-@Setter
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "Client")
@@ -23,15 +22,9 @@ import java.util.UUID;
 public class Client {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Type(type = "org.hibernate.type.UUIDCharType")
-    @Column(name = "id",
-            length = 36,
-            columnDefinition = "varchar(36)",
-            updatable = false,
-            nullable = false)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "username",
             nullable = false,

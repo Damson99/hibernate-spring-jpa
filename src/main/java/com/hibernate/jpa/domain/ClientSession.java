@@ -23,15 +23,9 @@ import java.util.UUID;
 public class ClientSession {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Type(type = "org.hibernate.type.UUIDCharType")
-    @Column(name = "id",
-            length = 36,
-            columnDefinition = "varchar(36)",
-            updatable = false,
-            nullable = false)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
 
     @CreationTimestamp
     @Column(name = "created_date",
@@ -57,7 +51,7 @@ public class ClientSession {
     @Column(name = "address_ip")
     private String addressIp;
 
-    @OneToMany
+    @ManyToMany
     private Collection<ClientAction> clientActions;
 
     @ManyToOne
